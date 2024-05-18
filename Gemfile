@@ -8,6 +8,9 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 # Faker to seed my database with fake data
 gem "faker"
 
+# Dalli to enable caching
+gem 'dalli'
+
 #pg_search to enable search functionality
 gem "pg_search"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

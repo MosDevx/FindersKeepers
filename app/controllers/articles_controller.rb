@@ -5,8 +5,17 @@ class ArticlesController < ApplicationController
   def index
     if params[:query].present?
       @articles = Article.search_by_title_and_category(params[:query])
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { render partial: 'searches/results', locals: { results: @results } }
+      end
     else
-      @articles = Article.all
+      @articles = Rails.cache.fetch('all_articles', expires_in: 1.hour) do
+        puts '###' * 100
+        logger.debug("Fetching articles from database")
+        Article.all
+      end
     end
 
 
