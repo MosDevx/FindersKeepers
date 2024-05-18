@@ -7,35 +7,21 @@
 
 <h1>Search For Articles</h1>
 
-<%= form_with url: articles_path, method: :get, local: true do |form| %>
+
+<%= form_with url: search_articles_path, method: :get, local: true, data: { turbo_stream: true } do |form| %>
   <%= form.label :query, "Search Articles" %>
-  <%= form.text_field :query, value: params[:query], placeholder: "Enter Search Query" %>
+
+  <%= form.text_field  :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box",data: { controller: "search-box",action: "input->search-box#search",search_box_target: "input"  }  %>
   <%= form.submit "Search" %>
 <% end %>
 
-<ul>
-  <% @articles.each do |article| %>
-    <li>
-      <strong>Title:</strong> <%= article.title %><br>
-      <strong>Author:</strong> <%= article.author %><br>
-      <strong>Category:</strong> <%= article.category %><br>
-      <strong>Published Date:</strong> <%= article.published_date %>
-    </li>
-  <% end %>
-</ul>
+<turbo-frame id="search-results">
+  <h1>Results come here</h1>
+  <%= render partial: 'results', locals: { results: @results} %>
+</turbo-frame>
 
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Articles</h1>
-    <%= link_to "New article", new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
 
-  <div id="articles" class="min-w-full">
-    <% @articles.each do |article| %>
-      <%= render article %>
-      <p>
-        <%= link_to "Show this article", article, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
-  </div>
+
+
 </div>

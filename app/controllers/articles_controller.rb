@@ -3,25 +3,35 @@ class ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    if params[:query].present?
-      @articles = Article.search_by_title_and_category(params[:query])
-
-      respond_to do |format|
-        format.turbo_stream
-        format.html { render partial: 'searches/results', locals: { results: @results } }
-      end
-    else
+   
       @articles = Rails.cache.fetch('all_articles', expires_in: 1.hour) do
         puts '###' * 100
         logger.debug("Fetching articles from database")
         Article.all
-      end
     end
 
 
   end
   # GET /articles/1 or /articles/1.json
   def show
+    
+  end
+
+  def search
+   
+    if params[:query].present?
+      @results = Article.search_by_title_and_category(params[:query])
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { render partial: 'articles/results', locals: { results: @results } }
+      end
+      # else
+      #     # redirect to the index page if no search query is provided
+      #     redirect_to articles_url, notice: "Please enter a search query"
+          
+      end
+ 
   end
 
   # GET /articles/new
