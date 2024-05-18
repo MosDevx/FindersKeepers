@@ -4,12 +4,13 @@ class ArticlesController < ApplicationController
   # GET /articles or /articles.json
   def index
     if params[:query].present?
-      @articles = Article.search_by_title_and_author(params[:query])
+      @articles = Article.search_by_title_and_category(params[:query])
     else
       @articles = Article.all
     end
-  end
 
+
+  end
   # GET /articles/1 or /articles/1.json
   def show
   end

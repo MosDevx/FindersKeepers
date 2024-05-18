@@ -5,6 +5,26 @@
 
   <% content_for :title, "Articles" %>
 
+<h1>Search For Articles</h1>
+
+<%= form_with url: articles_path, method: :get, local: true do |form| %>
+  <%= form.label :query, "Search Articles" %>
+  <%= form.text_field :query, value: params[:query], placeholder: "Enter Search Query" %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <strong>Title:</strong> <%= article.title %><br>
+      <strong>Author:</strong> <%= article.author %><br>
+      <strong>Category:</strong> <%= article.category %><br>
+      <strong>Published Date:</strong> <%= article.published_date %>
+    </li>
+  <% end %>
+</ul>
+
+
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Articles</h1>
     <%= link_to "New article", new_article_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
