@@ -21,3 +21,18 @@ services:
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
+
+          # Let's create our background worker
+  - type: worker
+    name: sidekiq-worker
+    env: ruby
+    region: ohio
+    buildCommand: bundle install
+    startCommand: bundle exec sidekiq -r ./main.rb
+    autoDeploy: false
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sidekiq-redis
+          property: connectionString
