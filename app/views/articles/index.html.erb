@@ -5,16 +5,16 @@
 
   <% content_for :title, "Articles" %>
 
-<h1>Search For Articles</h1>
 
-<turbo-frame id="search-form">
-<%= form_with url: search_articles_path, method: :get, data: { turbo_stream: true,controller: "search-box",action: "submit->search-box#submit", search_box_target: "form" } do |form| %>
-  <%= form.label :query, "Search Articles" %>
 
-  <%= form.text_field  :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box", data:{action:"input->search-box#search",search_box_target: "input" } %>
+<turbo-frame id="search-form" class="p-6 bg-white rounded shadow">
+<%= form_with url: search_articles_path, method: :get, data: { turbo_stream: true, controller: "search-box", action: "submit->search-box#submit", search_box_target: "form" }, class: "flex flex-col space-y-4" do |form| %>
+  <%= form.label :query, "Search Articles", class: "font-semibold text-lg" %>
+
+  <%= form.text_field  :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box", data:{action:"input->search-box#search",search_box_target: "input" }, class: "border-2 border-gray-300 p-2 rounded" %>
 
   <%= form.hidden_field :source, id: "query-source", value: "form" %>
-  <%= form.submit "Search" %>
+  <%= form.submit "Search", class: "bg-blue-500 text-white font-semibold p-2 rounded hover:bg-blue-600" %>
 <% end %>
 </turbo-frame>
 
@@ -22,24 +22,20 @@
  
 
 </turbo-frame>
-
-<turbo-frame id="User-query-metrics">
-  <% total_queries = UserQuery.count %>
-  <% unique_visitors = UserCount.count %>
-  <% unique_queries = UserQuery.select(:query).distinct.count %>
-  <% most_common_queries = UserQuery.group(:query).order('count_id desc').limit(10).count('id') %>
-
-  <p>Total queries: <%= total_queries %></p>
-  <p>Users Served: <%= unique_visitors %></p>
-  <p>Unique queries: <%= unique_queries %></p>
-  <p>10 most popular queries:</p>
-  <ul>
+<turbo-frame id="User-query-metrics" class="p-6 bg-white rounded shadow">
+  <div class="text-lg font-bold mb-4">User Query Metrics</div>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="text-sm font-semibold">Total queries: <span class="font-normal"><%= total_queries %></span></div>
+    <div class="text-sm font-semibold">Users Served: <span class="font-normal"><%= unique_visitors %></span></div>
+    <div class="text-sm font-semibold">Unique queries: <span class="font-normal"><%= unique_queries %></span></div>
+  </div>
+  <div class="text-lg font-bold mt-6 mb-2">10 most popular queries:</div>
+  <ul class="list-disc list-inside">
     <% most_common_queries.each do |query, count| %>
-      <li><%= query %> (searched <%= count %> times)</li>
+      <li class="text-sm"><%= query %> (searched <%= count %> times)</li>
     <% end %>
   </ul>
 </turbo-frame>
-
 
 
 

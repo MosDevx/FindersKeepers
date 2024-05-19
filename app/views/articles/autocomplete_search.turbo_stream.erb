@@ -5,14 +5,14 @@
 <% end %>
 
 <%= turbo_stream.replace "search-form" do %>
-  <turbo-frame id="search-form">
-    <%= form_with url: search_articles_path, method: :get, data: { turbo_stream: true,controller: "search-box",action: "submit->search-box#submit", search_box_target: "form" } do |form| %>
-  <%= form.label :query, "Search Articles" %>
+<turbo-frame id="search-form" class="p-6 bg-white rounded shadow">
+<%= form_with url: search_articles_path, method: :get, data: { turbo_stream: true, controller: "search-box", action: "submit->search-box#submit", search_box_target: "form" }, class: "flex flex-col space-y-4" do |form| %>
+  <%= form.label :query, "Search Articles", class: "font-semibold text-lg" %>
 
-  <%= form.text_field  :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box", data:{action:"input->search-box#search",search_box_target: "input" } %>
+  <%= form.text_field  :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box", data:{action:"input->search-box#search",search_box_target: "input" }, class: "border-2 border-gray-300 p-2 rounded" %>
 
   <%= form.hidden_field :source, id: "query-source", value: "form" %>
-  <%= form.submit "Search" %>
+  <%= form.submit "Search", class: "bg-blue-500 text-white font-semibold p-2 rounded hover:bg-blue-600" %>
 <% end %>
-  </turbo-frame>
+</turbo-frame>
 <% end %>

@@ -5,8 +5,10 @@
 
 <% if results&.any? %>
   <% results.each do |result| %>
-    <div><%= link_to result.title, article_path(result), data: { turbo_frame: '_top',turbo: 'false' }  %></div>
+    <div class="p-2 hover:bg-gray-200 cursor-pointer">
+      <%= link_to result.title, article_path(result), data: { turbo_frame: '_top', turbo: 'false' }, class: "text-blue-500 hover:text-blue-700" %>
+    </div>
   <% end %>
 <% else %>
-  <div>No results found</div>
+  <div class="p-2">No results found</div>
 <% end %>
