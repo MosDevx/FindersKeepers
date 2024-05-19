@@ -1,5 +1,6 @@
 <%= turbo_stream.replace "search-results" do %>
  <turbo-frame id="search-results">
+     <h3 class='text-center font-bold text-lg text-orange-600'>Search Suggestions</h3>
   <%= render partial: 'articles/results', locals: { results: @results , no_search_query:@no_search_query} %>
     </turbo-frame>
 <% end %>

@@ -33,6 +33,7 @@ class ArticlesController < ApplicationController
     @no_search_query = false
   
     if params[:query].present?
+      @search_term = params[:query]
       @results = Article.search_by_title_and_category(params[:query])
       log_query if params[:query].present? && params[:source] == "form"
     else
@@ -44,7 +45,7 @@ class ArticlesController < ApplicationController
   
     respond_to do |format|
       format.turbo_stream
-      format.html { render partial: 'articles/results', locals: { results: @results, no_search_query: @no_search_query } }
+      format.html { render partial: 'articles/results', locals: { results: @results, no_search_query: @no_search_query, search_term:@search_term } }
     end
   end
 
