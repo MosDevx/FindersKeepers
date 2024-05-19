@@ -1,5 +1,5 @@
 # config/sidekiq.yml
-:concurrency: 1
+:concurrency: 3
 :scheduler:
   :schedule:
     log_user_queries:

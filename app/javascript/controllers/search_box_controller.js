@@ -32,7 +32,7 @@ export default class extends Controller {
         document.getElementById('search-results').innerHTML = html;
         // this.reset()
       });
-    }, 800); // Delay to wait for user to stop typing
+    }, 400); // Delay to wait for user to stop typing
   }
   reset(event) {
     console.log("form reset")
