@@ -69,7 +69,7 @@ Rails.application.configure do
     url: ENV['REDIS_URL'],
     namespace: 'cache',
     expires_in: 1.hour,
-    pool_sizedate +%T -s "10:13:13": ENV.fetch("RAILS_MAX_THREADS") { 5 }
+    pool: ENV.fetch("RAILS_MAX_THREADS") { 5 }
   }
 
   Sidekiq.configure_server do |config|
