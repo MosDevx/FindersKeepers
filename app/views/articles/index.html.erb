@@ -7,13 +7,16 @@
 
 <h1>Search For Articles</h1>
 
-
-<%= form_with url: search_articles_path, method: :get, local: true, data: { turbo_stream: true } do |form| %>
+<turbo-frame id="search-form">
+<%= form_with url: search_articles_path, method: :get, data: { turbo_stream: true,controller: "search-box",action: "submit->search-box#submit", search_box_target: "form" } do |form| %>
   <%= form.label :query, "Search Articles" %>
 
-  <%= form.text_field  :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box",data: { controller: "search-box",action: "input->search-box#search",search_box_target: "input"  }  %>
+  <%= form.text_field  :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box", data:{action:"input->search-box#search",search_box_target: "input" } %>
+
+  <%= form.hidden_field :source, id: "query-source", value: "form" %>
   <%= form.submit "Search" %>
 <% end %>
+</turbo-frame>
 
 <turbo-frame id="search-results">
  

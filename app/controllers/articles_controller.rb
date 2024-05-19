@@ -10,17 +10,24 @@ class ArticlesController < ApplicationController
       #   Article.all
 
       # @articles = Article.all
-    end
+    # end
 
 
   end
   # GET /articles/1 or /articles/1.json
   def show
-
-      puts '###' * 100
-      puts 'show method called'
-    
+      log_article_selection
   end
+
+  def autocomplete_search
+    @results = Article.search_by_title_and_category(params[:query])
+    respond_to do |format|
+      format.turbo_stream
+      format.html { render partial: 'articles/results', locals: { results: @results } }
+    end
+  end
+
+  
 
   def search
     
@@ -28,8 +35,9 @@ class ArticlesController < ApplicationController
    
     if params[:query].present?
       @results = Article.search_by_title_and_category(params[:query])
+    
       
-      log_query
+      log_query if params[:query].present? && params[:source] == "form"
      
      
     else
@@ -99,6 +107,14 @@ class ArticlesController < ApplicationController
     user_queries = Rails.cache.fetch('user_queries', expires_in: 5.minutes) { [] }
     user_queries << { query: params[:query], ip_address: request.remote_ip }
     Rails.cache.write('user_queries', user_queries)
+  end
+
+  ## log user selection of article  as a user query too with article title as query
+  def log_article_selection
+    user_queries = Rails.cache.fetch('user_queries', expires_in: 5.minutes) { [] }
+    user_queries << { query: @article.title, ip_address: request.remote_ip }
+    Rails.cache.write('user_queries', user_queries)
+
   end
 
 

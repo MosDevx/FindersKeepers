@@ -5,7 +5,7 @@
 
 <% if results&.any? %>
   <% results.each do |result| %>
-    <div><%= link_to result.title, article_path(result), data: { turbo_frame: '_top' }  %></div>
+    <div><%= link_to result.title, article_path(result), data: { turbo_frame: '_top',turbo: 'false' }  %></div>
   <% end %>
 <% else %>
   <div>No results found</div>
