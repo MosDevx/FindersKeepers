@@ -3,7 +3,7 @@
 :scheduler:
   :schedule:
     log_user_queries:
-      cron: "*/5 * * * *"
+      cron: "*/3 * * * *"
       class: LogUserQueriesWorker
 :queues:
   - default

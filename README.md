@@ -22,7 +22,7 @@
 
 # 📖 [FindersKeepers] <a name="about-project"></a>
 
-**[FindersKeepers]** is a search engine application that allows users to seacrh for popular articles.
+**[FindersKeepers]** is a search engine application that allows users to search for popular articles.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -42,7 +42,7 @@
 
 - **[Query an Articles Repository]**
 - **[Cache Queries for Speedy retrieval]**
-- **[Provide Metric On User Queries]**
+- **[Provide Metric On User Queries(metrics consolidated after 3 minutes)]**
 
 
 
