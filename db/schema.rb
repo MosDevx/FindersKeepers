@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_18_084548) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_19_052426) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
@@ -19,6 +20,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_084548) do
     t.string "category"
     t.string "author"
     t.date "published_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_queries", force: :cascade do |t|
+    t.string "query"
+    t.string "ip_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

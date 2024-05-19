@@ -4,27 +4,35 @@ class ArticlesController < ApplicationController
   # GET /articles or /articles.json
   def index
    
-      @articles = Rails.cache.fetch('all_articles', expires_in: 1.hour) do
-        puts '###' * 100
-        logger.debug("Fetching articles from database")
-        Article.all
+      # @articles = Rails.cache.fetch('all_articles', expires_in: 1.hour) do
+      #   puts '###' * 100
+      #   logger.debug("Fetching articles from database")
+      #   Article.all
+
+      # @articles = Article.all
     end
 
 
   end
   # GET /articles/1 or /articles/1.json
   def show
+
+      puts '###' * 100
+      puts 'show method called'
     
   end
 
   def search
     
     @no_search_query = false
+   
     if params[:query].present?
       @results = Article.search_by_title_and_category(params[:query])
-    
+      
+      log_query
      
-      else
+     
+    else
           # if no query is present, return 10 latest articles 
           @results = Article.order('published_date DESC').limit(10)
           @no_search_query = true
@@ -86,6 +94,14 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def log_query
+    user_queries = Rails.cache.fetch('user_queries', expires_in: 5.minutes) { [] }
+    user_queries << { query: params[:query], ip_address: request.remote_ip }
+    Rails.cache.write('user_queries', user_queries)
+  end
+
+
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
