@@ -23,6 +23,22 @@
 
 </turbo-frame>
 
+<turbo-frame id="User-query-metrics">
+  <% total_queries = UserQuery.count %>
+  <% unique_visitors = UserCount.count %>
+  <% unique_queries = UserQuery.select(:query).distinct.count %>
+  <% most_common_queries = UserQuery.group(:query).order('count_id desc').limit(10).count('id') %>
+
+  <p>Total queries: <%= total_queries %></p>
+  <p>Users Served: <%= unique_visitors %></p>
+  <p>Unique queries: <%= unique_queries %></p>
+  <p>10 most popular queries:</p>
+  <ul>
+    <% most_common_queries.each do |query, count| %>
+      <li><%= query %> (searched <%= count %> times)</li>
+    <% end %>
+  </ul>
+</turbo-frame>
 
 
 

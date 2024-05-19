@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_19_052426) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_19_081930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_19_052426) do
     t.date "published_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_counts", force: :cascade do |t|
+    t.string "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip_address"], name: "index_user_counts_on_ip_address", unique: true
   end
 
   create_table "user_queries", force: :cascade do |t|

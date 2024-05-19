@@ -1,0 +1,2 @@
+class UserCount < ApplicationRecord
+end
