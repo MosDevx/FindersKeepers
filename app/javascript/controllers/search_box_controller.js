@@ -15,9 +15,9 @@ export default class extends Controller {
 
   }
 
-  search(event) {
-    event.preventDefault();
-    console.log("seacrh called")
+  search() {
+
+
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       const query = this.inputTarget.value;

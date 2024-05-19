@@ -26,13 +26,13 @@ services:
   - type: worker
     name: sidekiq-worker
     env: ruby
-    region: ohio
+    region: oregon
     buildCommand: bundle install
-    startCommand: bundle exec sidekiq -C config/sidekiq.yml
-    autoDeploy: false
+    startCommand: bundle exec sidekiq 
+    autoDeploy: true
     envVars:
       - key: REDIS_URL
         fromService:
           type: redis
-          name: sidekiq-redis
+          name: FindersKeeperRedisCache
           property: connectionString
