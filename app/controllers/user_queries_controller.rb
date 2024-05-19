@@ -2,7 +2,7 @@
 class UserQueriesController < ApplicationController
   def index
     @total_queries = UserQuery.count
-    @unique_visitors = UserCount.distinct.count(:user_id)
+    @unique_visitors = UserCount.count
     @unique_queries = UserQuery.select(:query).distinct.count
     @most_common_queries = UserQuery.group(:query).count.sort_by { |_k, v| v }.reverse.first(10)
   rescue => e
