@@ -72,6 +72,14 @@ Rails.application.configure do
     pool_size: ENV.fetch("RAILS_MAX_THREADS") { 5 }
   }
 
+  Sidekiq.configure_server do |config|
+    config.redis = { url: ENV['REDIS_URL'] }
+  end
+  
+  Sidekiq.configure_client do |config|
+    config.redis = { url: ENV['REDIS_URL'] }
+  end
+
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "finders_keepers_production"
