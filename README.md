@@ -40,7 +40,7 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **[Query an Artciles Repository]**
+- **[Query an Articles Repository]**
 - **[Cache Queries for Speedy retrieval]**
 - **[Provide Metric On User Queries]**
 
@@ -62,6 +62,7 @@ In order to run this project you need the following installed in your local syst
 <ul>
 <li>Ruby</li>
 <li>Git CLI</li>
+<li>Redis</li>
 <li>Github account</li>
 </ul>
 
@@ -105,9 +106,9 @@ To run the project, execute the following command:
 
 👤 **Moses Wamae**
 
-- GitHub: [@Johnadibe](https://github.com/MosDevx)
-- Twitter: [@JohnAdibe2](https://twitter.com/MosesWamae7)
-- LinkedIn: [@John Adibe](https://www.linkedin.com/in/moses-wamae-a13a67244)
+- GitHub: [@Moses Wamae](https://github.com/MosDevx)
+- Twitter: [@Moses Wamae](https://twitter.com/MosesWamae7)
+- LinkedIn: [@Moses Wamae](https://www.linkedin.com/in/moses-wamae-a13a67244)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -145,7 +146,7 @@ If you like this project please leave a STAR to the [Github repo](https://github
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to appreciate [Microverse](https://helpjuice.com/) for providing the resources and the impetus to develop this application and grow my code-fu.
+I would like to appreciate [Microverse](https://helpjuice.com/) for providing the chance and impetus to develop this application and grow my code-fu.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
