@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'autocomplete_search', to: 'articles#autocomplete_search'
   # link to user queries index page only 
   resources :user_queries, only: [:index]
+  
 
   # Defines the root path route ("/")
   root "articles#index"

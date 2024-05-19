@@ -4,14 +4,6 @@ class ArticlesController < ApplicationController
   # GET /articles or /articles.json
   def index
    
-      # @articles = Rails.cache.fetch('all_articles', expires_in: 1.hour) do
-      #   puts '###' * 100
-      #   logger.debug("Fetching articles from database")
-      #   Article.all
-
-      # @articles = Article.all
-    # end
-
 
   end
   # GET /articles/1 or /articles/1.json
