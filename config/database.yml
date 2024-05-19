@@ -79,6 +79,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
   database: finders_keepers_production
   username: finders_keepers
   password: <%= ENV["FINDERS_KEEPERS_DATABASE_PASSWORD"] %>
