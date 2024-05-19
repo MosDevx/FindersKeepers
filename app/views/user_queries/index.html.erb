@@ -19,9 +19,9 @@
       </div>
       <div class="mt-8">
         <h2 class="text-2xl font-bold mb-4  text-gray-500  text-center">10 Most Popular Queries</h2>
-        <ul class="list-disc list-inside">
+        <ul class=" list-none">
           <% @most_common_queries.each do |query, count| %>
-            <li class="text-lg"><%= query %> (searched <%= count %> times)</li>
+            <li class="text-lg p-2"><%= query %> (searched <%= count %> times)</li>
           <% end %>
         </ul>
       </div>
