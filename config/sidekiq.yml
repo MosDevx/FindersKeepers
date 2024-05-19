@@ -1,3 +1,8 @@
+# config/sidekiq.yml
 :concurrency: 5
+:schedule:
+  log_user_queries:
+    cron: "*/5 * * * *"
+    class: LogUserQueriesWorker
 :queues:
   - default

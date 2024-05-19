@@ -16,6 +16,7 @@ gem 'redis'
 gem 'redis-rails'
 # Use sidekiq for background jobs
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
 
 

@@ -1,0 +1,2 @@
+class UserQuery < ApplicationRecord
+end
