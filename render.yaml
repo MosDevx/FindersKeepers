@@ -1,6 +1,6 @@
 databases:
-  - name: FindersKeepers
-    databaseName: FindersKeepers
+  - name: finders_keepers_production
+    databaseName: finders_keepers_production
     user: finders_keepers
     plan: free
 
