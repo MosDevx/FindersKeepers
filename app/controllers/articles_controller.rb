@@ -12,7 +12,9 @@ class ArticlesController < ApplicationController
   end
 
   def autocomplete_search
-    @results = Article.search_by_title_and_category(params[:query])
+    @results = Rails.cache.fetch("search_results/#{params[:query]}", expires_in: 15.minutes) do
+    Article.search_by_title_and_category(params[:query]).to_a
+  end
     respond_to do |format|
       format.turbo_stream
       format.html { render partial: 'articles/results', locals: { results: @results } }
@@ -26,7 +28,17 @@ class ArticlesController < ApplicationController
   
     if params[:query].present?
       @search_term = params[:query]
-      @results = Article.search_by_title_and_category(params[:query])
+      cache_key = "search_results/#{params[:query]}"
+      
+      # Attempt to fetch the results from cache
+      @results = Rails.cache.read(cache_key)
+      
+      # If the results are not in the cache, perform the search and cache the results
+      if @results.nil?
+        @results = Article.search_by_title_and_category(params[:query]).to_a
+        Rails.cache.write(cache_key, @results, expires_in: 15.minutes)
+      end
+      
       log_query if params[:query].present? && params[:source] == "form"
     else
       # if no query is present, return 10 latest articles 
@@ -34,13 +46,12 @@ class ArticlesController < ApplicationController
       @no_search_query = true
     end
   
-  
     respond_to do |format|
       format.turbo_stream
-      format.html { render partial: 'articles/results', locals: { results: @results, no_search_query: @no_search_query, search_term:@search_term } }
+      format.html { render partial: 'articles/results', locals: { results: @results, no_search_query: @no_search_query, search_term: @search_term } }
     end
   end
-
+  
   # GET /articles/new
   def new
     @article = Article.new

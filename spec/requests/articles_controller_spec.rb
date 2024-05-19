@@ -1,30 +1,4 @@
-require 'rails_helper'
 
-RSpec.describe ArticlesController, type: :request do
-  describe "GET /index" do
-    it "renders the index template" do
-      get articles_path
-      expect(response).to render_template(:index)
-    end
-  end
-
-  describe "GET /show" do
-    it "renders the show template" do
-      article = Article.create(title: "Test Article", category: "Books")
-      get article_path(article)
-      expect(response).to render_template(:show)
-    end
-  end
-
-  describe "PATCH /update" do
-    it "updates an existing article" do
-      article = Article.create(title: "Test Article", category: "Books")
-      patch article_path(article), params: { article: { title: "Updated Article" } }
-      expect(article.reload.title).to eq("Updated Article")
-    end
-  end
-
-end
 require 'rails_helper'
 
 RSpec.describe ArticlesController, type: :request do
