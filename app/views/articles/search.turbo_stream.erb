@@ -1,5 +1,5 @@
 <%= turbo_stream.replace "search-results" do %>
  <turbo-frame id="search-results">
-  <%= render partial: 'articles/results', locals: { results: @results } %>
+  <%= render partial: 'articles/results', locals: { results: @results , no_search_query:@no_search_query} %>
     </turbo-frame>
 <% end %>

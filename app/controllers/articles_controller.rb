@@ -18,18 +18,22 @@ class ArticlesController < ApplicationController
   end
 
   def search
-   
+    
+    @no_search_query = false
     if params[:query].present?
       @results = Article.search_by_title_and_category(params[:query])
-
+    
+     
+      else
+          # if no query is present, return 10 latest articles 
+          @results = Article.order('published_date DESC').limit(10)
+          @no_search_query = true
+ 
+           
+      end
       respond_to do |format|
         format.turbo_stream
-        format.html { render partial: 'articles/results', locals: { results: @results } }
-      end
-      # else
-      #     # redirect to the index page if no search query is provided
-      #     redirect_to articles_url, notice: "Please enter a search query"
-          
+        format.html { render partial: 'articles/results', locals: { results: @results, no_search_query: @no_search_query } }
       end
  
   end

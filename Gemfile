@@ -11,6 +11,14 @@ gem "faker"
 # Dalli to enable caching
 gem 'dalli'
 
+# redis for caching
+gem 'redis'
+gem 'redis-rails'
+# Use sidekiq for background jobs
+gem 'sidekiq'
+
+
+
 #pg_search to enable search functionality
 gem "pg_search"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]

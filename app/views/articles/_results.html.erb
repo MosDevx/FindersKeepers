@@ -1,3 +1,8 @@
+
+<% if no_search_query %>
+<div>10 Most recent articles</div>
+<% end %>
+
 <% if results&.any? %>
   <% results.each do |result| %>
     <div><%= link_to result.title, article_path(result), data: { turbo_frame: '_top' }  %></div>
