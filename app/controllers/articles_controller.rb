@@ -27,31 +27,25 @@ class ArticlesController < ApplicationController
     end
   end
 
-  
+
 
   def search
-    
     @no_search_query = false
-   
+  
     if params[:query].present?
       @results = Article.search_by_title_and_category(params[:query])
-    
-      
       log_query if params[:query].present? && params[:source] == "form"
-     
-     
     else
-          # if no query is present, return 10 latest articles 
-          @results = Article.order('published_date DESC').limit(10)
-          @no_search_query = true
- 
-           
-      end
-      respond_to do |format|
-        format.turbo_stream
-        format.html { render partial: 'articles/results', locals: { results: @results, no_search_query: @no_search_query } }
-      end
- 
+      # if no query is present, return 10 latest articles 
+      @results = Article.order('published_date DESC').limit(5)
+      @no_search_query = true
+    end
+  
+  
+    respond_to do |format|
+      format.turbo_stream
+      format.html { render partial: 'articles/results', locals: { results: @results, no_search_query: @no_search_query } }
+    end
   end
 
   # GET /articles/new

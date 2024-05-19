@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   get 'search_articles', to: 'articles#search'
   get 'autocomplete_search', to: 'articles#autocomplete_search'
+  # link to user queries index page only 
+  get 'user_queries', to: 'user_queries#index'
 
   # Defines the root path route ("/")
   root "articles#index"

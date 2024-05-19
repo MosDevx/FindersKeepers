@@ -1,41 +1,31 @@
 <div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% if flash[:notice] %>
+    <div class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
+      <%= flash[:notice] %>
+    </div>
   <% end %>
 
+ <div class="flex justify-center items-center ">
+  <h1 class="text-4xl font-bold">Finders Keepers</h1>
+</div>
+
+
   <% content_for :title, "Articles" %>
+<turbo-frame id="search-form" class="flex items-center">
+  <%= form_with url: search_articles_path, method: :get, data: { turbo_stream: true, controller: "search-box", action: "submit->search-box#submit", search_box_target: "form" }, class: "flex-1 flex flex-col space-y-4" do |form| %>
+    <div class="flex">
+      <%= form.text_field :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box", data: { action: "input->search-box#search", search_box_target: "input" }, class: "border-2 border-gray-300 p-2 rounded flex-1 mr-2" %>
 
-
-
-<turbo-frame id="search-form" class="p-6 bg-white rounded shadow">
-<%= form_with url: search_articles_path, method: :get, data: { turbo_stream: true, controller: "search-box", action: "submit->search-box#submit", search_box_target: "form" }, class: "flex flex-col space-y-4" do |form| %>
-  <%= form.label :query, "Search Articles", class: "font-semibold text-lg" %>
-
-  <%= form.text_field  :query, value: params[:query], placeholder: "Enter Search Query", id: "search-box", data:{action:"input->search-box#search",search_box_target: "input" }, class: "border-2 border-gray-300 p-2 rounded" %>
-
-  <%= form.hidden_field :source, id: "query-source", value: "form" %>
-  <%= form.submit "Search", class: "bg-blue-500 text-white font-semibold p-2 rounded hover:bg-blue-600" %>
-<% end %>
+      <%= form.hidden_field :source, id: "query-source", value: "form" %>
+      
+      <%= form.submit "Search", class: "bg-blue-500 text-white font-semibold p-2 rounded hover:bg-blue-600" %>
+    </div>
+  <% end %>
 </turbo-frame>
 
-<turbo-frame id="search-results">
- 
 
-</turbo-frame>
-<turbo-frame id="User-query-metrics" class="p-6 bg-white rounded shadow">
-  <div class="text-lg font-bold mb-4">User Query Metrics</div>
-  <div class="grid grid-cols-2 gap-4">
-    <div class="text-sm font-semibold">Total queries: <span class="font-normal"><%= total_queries %></span></div>
-    <div class="text-sm font-semibold">Users Served: <span class="font-normal"><%= unique_visitors %></span></div>
-    <div class="text-sm font-semibold">Unique queries: <span class="font-normal"><%= unique_queries %></span></div>
-  </div>
-  <div class="text-lg font-bold mt-6 mb-2">10 most popular queries:</div>
-  <ul class="list-disc list-inside">
-    <% most_common_queries.each do |query, count| %>
-      <li class="text-sm"><%= query %> (searched <%= count %> times)</li>
-    <% end %>
-  </ul>
-</turbo-frame>
+
+  <turbo-frame id="search-results"></turbo-frame>
 
 
 

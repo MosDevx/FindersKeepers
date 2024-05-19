@@ -1,14 +1,18 @@
-
 <% if no_search_query %>
-<div>10 Most recent articles</div>
+  <div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-900 p-4 rounded-md mb-4">
+    <p class="font-semibold">Please enter a search query</p>
+  </div>
+  <p class="text-gray-600 mb-2">Or check out our 5 most recent articles:</p>
 <% end %>
 
 <% if results&.any? %>
-  <% results.each do |result| %>
-    <div class="p-2 hover:bg-gray-200 cursor-pointer">
-      <%= link_to result.title, article_path(result), data: { turbo_frame: '_top', turbo: 'false' }, class: "text-blue-500 hover:text-blue-700" %>
-    </div>
-  <% end %>
+  <div class="grid grid-cols-1 gap-4">
+    <% results.each do |result| %>
+      <div class="bg-white shadow-md hover:shadow-lg transition duration-300 rounded-md cursor-pointer">
+        <%= link_to result.title, article_path(result), data: { turbo_frame: '_top', turbo: 'false' }, class: "block px-6 py-4 text-blue-500 hover:text-blue-700 font-semibold" %>
+      </div>
+    <% end %>
+  </div>
 <% else %>
-  <div class="p-2">No results found</div>
+  <div class="bg-gray-100 text-gray-600 p-4 rounded-md">No results found</div>
 <% end %>
