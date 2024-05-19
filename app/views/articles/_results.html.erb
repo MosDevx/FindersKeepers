@@ -5,7 +5,7 @@
   <p class="text-gray-600 mb-2">Or check out our 5 most recent articles:</p>
 <% end %>
 
-<% if results&.any? %>
+<% if results&.any?   %>
   <div class="grid grid-cols-1 gap-4">
     <% results.each do |result| %>
       <div class="bg-white shadow-md hover:shadow-lg transition duration-300 rounded-md cursor-pointer">
@@ -14,5 +14,10 @@
     <% end %>
   </div>
 <% else %>
-  <div class="bg-gray-100 text-gray-600 p-4 rounded-md">No results found</div>
+  <%# dsplay of only no_searc_query is false %>
+  <% unless no_search_query %>
+    <div class="bg-gray-100 text-gray-600 p-4 rounded-md">No results found</div>
+  <% end %>
+
+  <%# <div class="bg-gray-100 text-gray-600 p-4 rounded-md">No results found </div> %>
 <% end %>
