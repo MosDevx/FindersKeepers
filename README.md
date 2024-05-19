@@ -146,7 +146,7 @@ If you like this project please leave a STAR to the [Github repo](https://github
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to appreciate [Microverse](https://helpjuice.com/) for providing the chance and impetus to develop this application and grow my code-fu.
+I would like to appreciate [Helpjuice](https://helpjuice.com/) for providing the chance and impetus to develop this application and grow my code-fu.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
